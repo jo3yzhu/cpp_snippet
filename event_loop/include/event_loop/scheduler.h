@@ -1,13 +1,13 @@
-#include <event_loop/task.h>
-#include <functional>
-#include <vector>
-#include <list>
+#pragma once
 
+#include <event_loop/task.h>
+#include <memory>
+#include <list>
 
 class Scheduler {
 public:
+    void Submit(std::unique_ptr<Task> &&task);
     void Schedule();
-    void Submit();
 private:
-    std::list<Task> queue_;
+    std::list<std::unique_ptr<Task>> queue_;
 };
